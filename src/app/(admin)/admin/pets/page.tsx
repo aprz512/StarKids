@@ -140,7 +140,7 @@ export default function AdminPetsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-warm-800">🐱 宠物管理</h1>
           <p className="text-sm text-warm-400 mt-1">管理宠物装扮和小朋友获取情况</p>

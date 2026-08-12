@@ -176,7 +176,7 @@ export default function KidsPetPage() {
 
   if (loading) {
     return (
-      <PageTransition className="p-5 space-y-4">
+      <PageTransition className="p-5 space-y-4 md:p-8">
         <h1 className="font-kids text-3xl text-candy-purple pt-4">🐱 我的宠物</h1>
         <ProfileSkeleton />
       </PageTransition>
@@ -185,7 +185,7 @@ export default function KidsPetPage() {
 
   if (!pet) {
     return (
-      <PageTransition className="p-5 space-y-5">
+      <PageTransition className="p-5 space-y-5 md:p-8">
         <h1 className="font-kids text-3xl text-candy-purple pt-4">🐱 我的宠物</h1>
 
         {showCreateForm ? (
@@ -216,7 +216,7 @@ export default function KidsPetPage() {
   const jarHeight = Math.min(100, Math.max(8, jarFillPercent))
 
   return (
-    <PageTransition className="p-5 space-y-5">
+    <PageTransition className="p-5 space-y-5 md:p-8">
       <h1 className="font-kids text-3xl text-candy-purple pt-4">🐱 我的宠物</h1>
 
       {evolving && (
@@ -365,7 +365,7 @@ export default function KidsPetPage() {
               收起
             </button>
           </h2>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
             {outfits.map((outfit) => {
               const isUnlocked = unlockedIds.includes(outfit.id) || outfit.isDefault
               const isEquipped = pet?.currentOutfit === outfit.id
@@ -426,7 +426,7 @@ function CreatePetForm({
     <form onSubmit={onSubmit} className="bg-white rounded-card shadow-soft p-5 space-y-4">
       <h3 className="font-kids text-lg text-warm-700">🎉 选择你的宠物伙伴</h3>
 
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-4 gap-2 md:grid-cols-8 md:gap-3">
         {Object.entries(SPECIES_LABELS).map(([key, label]) => (
           <button
             key={key}

@@ -24,8 +24,8 @@ export default async function KidsLayout({
 
   return (
     <SessionProvider>
-      <div className="min-h-screen pb-20 bg-warm-50 max-w-lg mx-auto">
-        <div className="flex justify-between items-center px-5 pt-3">
+      <div className="min-h-screen pb-20 bg-warm-50 max-w-lg mx-auto md:max-w-3xl">
+        <div className="flex justify-between items-center px-5 pt-3 md:px-8">
           <KidsLogoutButton />
           <NotificationBell />
         </div>

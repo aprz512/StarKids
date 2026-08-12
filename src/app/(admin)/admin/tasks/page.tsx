@@ -113,7 +113,7 @@ export default function AdminTasksPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-bold text-warm-800">📋 任务管理</h1>
         <button
           onClick={() => {
@@ -218,13 +218,13 @@ export default function AdminTasksPage() {
                 className="bg-white rounded-xl shadow-card p-4 flex items-center gap-4"
               >
                 <div className="text-3xl">{comp.task.icon || "📌"}</div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-warm-800">{comp.task.name}</h3>
                   <p className="text-sm text-warm-400">
                     {comp.member.nickname} · {new Date(comp.date).toLocaleDateString("zh-CN")}
                   </p>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-shrink-0">
                   <button
                     onClick={() => handleApprove(comp.id)}
                     className="h-9 px-4 bg-candy-green text-white rounded-xl text-sm font-semibold hover:brightness-110 transition-all"

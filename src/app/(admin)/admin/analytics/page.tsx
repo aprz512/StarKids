@@ -132,7 +132,7 @@ export default function AdminAnalyticsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-warm-800">📈 统计分析</h1>
           <p className="text-sm text-warm-400 mt-1">过去30天的数据总览</p>
@@ -149,7 +149,7 @@ export default function AdminAnalyticsPage() {
         </select>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         <OverviewCard
           icon="✅"
           label="完成任务"

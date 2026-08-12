@@ -71,7 +71,7 @@ export default function KidsHomePage() {
 
   if (loading) {
     return (
-      <PageTransition className="p-5 space-y-6">
+      <PageTransition className="p-5 space-y-6 md:p-8">
         <header className="pt-4">
           <h1 className="font-kids text-3xl text-candy-purple">🌟 加载中...</h1>
         </header>
@@ -83,7 +83,7 @@ export default function KidsHomePage() {
 
   if (error) {
     return (
-      <PageTransition className="p-5 space-y-6">
+      <PageTransition className="p-5 space-y-6 md:p-8">
         <header className="pt-4">
           <h1 className="font-kids text-3xl text-candy-purple">🌟 小朋友乐园</h1>
         </header>
@@ -102,7 +102,7 @@ export default function KidsHomePage() {
   }
 
   return (
-    <PageTransition className="p-5 space-y-6">
+    <PageTransition className="p-5 space-y-6 md:p-8">
       <header className="pt-4">
         <h1 className="font-kids text-3xl text-candy-purple">
           🌟 {greeting}{member?.nickname ? `，${member.nickname}` : ""}！
@@ -191,7 +191,7 @@ export default function KidsHomePage() {
         )}
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
         <Link href="/kids/shop" className="bg-white rounded-card shadow-soft p-4 hover:scale-[1.02] transition-transform">
           <div className="text-3xl mb-2">🛒</div>
           <h3 className="font-kids text-base text-warm-700">积分商城</h3>

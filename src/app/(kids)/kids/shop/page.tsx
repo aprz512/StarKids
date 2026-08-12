@@ -80,7 +80,7 @@ export default function KidsShopPage() {
   const jarHeight = Math.min(100, Math.max(8, jarFillPercent))
 
   return (
-    <PageTransition className="p-5 space-y-5">
+    <PageTransition className="p-5 space-y-5 md:p-8">
       <h1 className="font-kids text-3xl text-candy-purple pt-4">🛒 积分商城</h1>
 
       <div className="bg-white rounded-card shadow-soft p-5 space-y-4">
@@ -152,7 +152,7 @@ export default function KidsShopPage() {
             <p>商城还没上架商品，让爸爸妈妈来添加吧！</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
             {rewards.map((reward) => (
               <RewardCard
                 key={reward.id}

@@ -64,7 +64,7 @@ export default function KidsAchievementsPage() {
   ]
 
   return (
-    <PageTransition className="p-5 space-y-5">
+    <PageTransition className="p-5 space-y-5 md:p-8">
       <h1 className="font-kids text-3xl text-candy-purple pt-4">🏆 我的成就</h1>
 
       <div className="bg-white rounded-card shadow-soft p-5">
@@ -127,7 +127,7 @@ export default function KidsAchievementsPage() {
               <h2 className="font-kids text-lg text-candy-green mb-3">
                 ✅ 已解锁 ({unlocked.length})
               </h2>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-3 md:grid-cols-4 md:gap-4">
                 {unlocked.map((ach) => (
                   <div
                     key={ach.id}
@@ -147,7 +147,7 @@ export default function KidsAchievementsPage() {
               <h2 className="font-kids text-lg text-warm-400 mb-3">
                 🔒 未解锁 ({locked.length})
               </h2>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-3 md:grid-cols-4 md:gap-4">
                 {locked.map((ach) => (
                   <div
                     key={ach.id}

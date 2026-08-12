@@ -70,7 +70,7 @@ export default function KidsTasksPage() {
   const progress = tasks.length > 0 ? Math.round((completedCount / tasks.length) * 100) : 0
 
   return (
-    <PageTransition className="p-5 space-y-5">
+    <PageTransition className="p-5 space-y-5 md:p-8">
       <h1 className="font-kids text-3xl text-candy-purple pt-4">📋 今日任务</h1>
 
       <div className="bg-white rounded-card shadow-soft p-4">

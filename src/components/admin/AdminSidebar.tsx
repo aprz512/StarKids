@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { signOut } from "next-auth/react"
 
@@ -34,63 +35,93 @@ const adminNavItems = [
 
 export function AdminSidebar() {
   const pathname = usePathname()
+  const [open, setOpen] = useState(false)
+
+  const close = () => setOpen(false)
 
   return (
-    <aside className="fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-warm-200 flex flex-col">
-      <div className="h-16 flex items-center px-6 border-b border-warm-200">
-        <Link href="/admin" className="flex items-center gap-2">
-          <span className="text-2xl">🌟</span>
-          <span className="font-kids text-xl text-candy-purple">StarKids</span>
-        </Link>
-      </div>
+    <>
+      {/* 汉堡按钮 (md 以下显示) */}
+      <button
+        onClick={() => setOpen(true)}
+        aria-label="打开菜单"
+        className="fixed top-4 left-4 z-50 md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white shadow-soft border border-warm-200 text-warm-700 hover:bg-warm-50 transition-colors"
+      >
+        <span className="text-lg leading-none">☰</span>
+      </button>
 
-      <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-6">
-        {adminNavItems.map((section) => (
-          <div key={section.section}>
-            <h3 className="px-3 mb-2 text-xs font-semibold text-warm-400 uppercase tracking-wider">
-              {section.section}
-            </h3>
-            <ul className="space-y-1">
-              {section.items.map((item) => {
-                const isActive = pathname === item.href
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors",
-                        isActive
-                          ? "bg-admin-primary text-white"
-                          : "text-warm-600 hover:bg-warm-100"
-                      )}
-                    >
-                      <span className="text-lg">{item.icon}</span>
-                      <span>{item.label}</span>
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        ))}
-      </nav>
+      {/* 移动端遮罩 */}
+      {open && (
+        <div
+          className="fixed inset-0 z-40 bg-black/40 md:hidden"
+          onClick={close}
+        />
+      )}
 
-      <div className="border-t border-warm-200 p-4 space-y-2">
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-sm text-warm-400 hover:text-warm-600 transition-colors"
-        >
-          <span>←</span>
-          <span>返回首页</span>
-        </Link>
-        <button
-          onClick={() => signOut({ callbackUrl: "/login" })}
-          className="flex items-center gap-2 text-sm text-warm-400 hover:text-candy-red transition-colors w-full"
-        >
-          <span>🚪</span>
-          <span>退出登录</span>
-        </button>
-      </div>
-    </aside>
+      <aside
+        className={cn(
+          "fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-warm-200 flex flex-col transition-transform duration-300",
+          "md:translate-x-0",
+          open ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        <div className="h-16 flex items-center px-6 border-b border-warm-200">
+          <Link href="/admin" onClick={close} className="flex items-center gap-2">
+            <span className="text-2xl">🌟</span>
+            <span className="font-kids text-xl text-candy-purple">StarKids</span>
+          </Link>
+        </div>
+
+        <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-6">
+          {adminNavItems.map((section) => (
+            <div key={section.section}>
+              <h3 className="px-3 mb-2 text-xs font-semibold text-warm-400 uppercase tracking-wider">
+                {section.section}
+              </h3>
+              <ul className="space-y-1">
+                {section.items.map((item) => {
+                  const isActive = pathname === item.href
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={close}
+                        className={cn(
+                          "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors",
+                          isActive
+                            ? "bg-admin-primary text-white"
+                            : "text-warm-600 hover:bg-warm-100"
+                        )}
+                      >
+                        <span className="text-lg">{item.icon}</span>
+                        <span>{item.label}</span>
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          ))}
+        </nav>
+
+        <div className="border-t border-warm-200 p-4 space-y-2">
+          <Link
+            href="/"
+            onClick={close}
+            className="flex items-center gap-2 text-sm text-warm-400 hover:text-warm-600 transition-colors"
+          >
+            <span>←</span>
+            <span>返回首页</span>
+          </Link>
+          <button
+            onClick={() => signOut({ callbackUrl: "/login" })}
+            className="flex items-center gap-2 text-sm text-warm-400 hover:text-candy-red transition-colors w-full"
+          >
+            <span>🚪</span>
+            <span>退出登录</span>
+          </button>
+        </div>
+      </aside>
+    </>
   )
 }
