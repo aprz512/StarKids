@@ -177,7 +177,7 @@ export default function KidsPetPage() {
   if (loading) {
     return (
       <PageTransition className="p-5 space-y-4 md:p-8">
-        <h1 className="font-kids text-3xl text-candy-purple pt-4">🐱 我的宠物</h1>
+        <h1 className="font-kids text-2xl text-warm-800 pt-4">🐱 我的宠物</h1>
         <ProfileSkeleton />
       </PageTransition>
     )
@@ -186,7 +186,7 @@ export default function KidsPetPage() {
   if (!pet) {
     return (
       <PageTransition className="p-5 space-y-5 md:p-8">
-        <h1 className="font-kids text-3xl text-candy-purple pt-4">🐱 我的宠物</h1>
+        <h1 className="font-kids text-2xl text-warm-800 pt-4">🐱 我的宠物</h1>
 
         {showCreateForm ? (
           <CreatePetForm
@@ -217,7 +217,7 @@ export default function KidsPetPage() {
 
   return (
     <PageTransition className="p-5 space-y-5 md:p-8">
-      <h1 className="font-kids text-3xl text-candy-purple pt-4">🐱 我的宠物</h1>
+      <h1 className="font-kids text-2xl text-warm-800 pt-4">🐱 我的宠物</h1>
 
       {evolving && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">

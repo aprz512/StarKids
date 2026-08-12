@@ -249,7 +249,7 @@ export default function AdminFamilyPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-card p-5 flex items-center justify-between">
+      <div className="bg-white rounded-xl border border-warm-200 shadow-card p-5 flex items-center justify-between">
         <div>
           <p className="text-xs text-warm-400 uppercase tracking-wide">邀请码</p>
           <p className="font-mono text-xl font-bold text-admin-primary tracking-widest mt-0.5">
@@ -274,7 +274,7 @@ export default function AdminFamilyPage() {
           <h2 className="font-semibold text-warm-700 mb-3">👑 家长 ({parents.length})</h2>
           <div className="space-y-2">
             {parents.map((m) => (
-              <div key={m.id} className="bg-white rounded-xl shadow-card p-4 flex items-center gap-4">
+              <div key={m.id} className="bg-white rounded-xl border border-warm-200 shadow-card p-4 flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-2xl">
                   👑
                 </div>
@@ -295,7 +295,7 @@ export default function AdminFamilyPage() {
           <h2 className="font-semibold text-warm-700 mb-3">🌟 小朋友 ({kids.length})</h2>
           <div className="space-y-2">
             {kids.map((m) => (
-              <div key={m.id} className="bg-white rounded-xl shadow-card p-4 flex items-center gap-4">
+              <div key={m.id} className="bg-white rounded-xl border border-warm-200 shadow-card p-4 flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center text-2xl">
                   {m.pet?.species ? SPECIES_EMOJI[m.pet.species] || "🌟" : "🌟"}
                 </div>

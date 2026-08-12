@@ -81,7 +81,7 @@ export default function KidsShopPage() {
 
   return (
     <PageTransition className="p-5 space-y-5 md:p-8">
-      <h1 className="font-kids text-3xl text-candy-purple pt-4">🛒 积分商城</h1>
+      <h1 className="font-kids text-2xl text-warm-800 pt-4">🛒 积分商城</h1>
 
       <div className="bg-white rounded-card shadow-soft p-5 space-y-4">
         <div className="flex items-center gap-4">

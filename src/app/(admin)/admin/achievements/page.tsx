@@ -177,7 +177,7 @@ export default function AdminAchievementsPage() {
           </div>
         ) : (
           achievements.map((ach) => (
-            <div key={ach.id} className="bg-white rounded-xl shadow-card overflow-hidden">
+            <div key={ach.id} className="bg-white rounded-xl border border-warm-200 shadow-card overflow-hidden">
               <div className="p-5">
                 <div className="flex items-start gap-4">
                   <div className="text-4xl">{ach.icon}</div>
@@ -284,7 +284,7 @@ function AchievementForm({
   const [conditionType, setConditionType] = useState(cond?.type || "TASK_COUNT")
 
   return (
-    <form onSubmit={onSubmit} className="bg-white rounded-xl shadow-card p-5 space-y-4">
+    <form onSubmit={onSubmit} className="bg-white rounded-xl border border-warm-200 shadow-card p-5 space-y-4">
       <h3 className="font-semibold text-warm-700">{editItem ? "编辑成就" : "创建新成就"}</h3>
 
       {error && (

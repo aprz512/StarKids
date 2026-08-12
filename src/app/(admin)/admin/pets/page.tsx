@@ -177,7 +177,7 @@ export default function AdminPetsPage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {outfits.map((outfit) => (
-              <div key={outfit.id} className="bg-white rounded-xl shadow-card overflow-hidden">
+              <div key={outfit.id} className="bg-white rounded-xl border border-warm-200 shadow-card overflow-hidden">
                 <div className="p-5">
                   <div className="flex items-start gap-4">
                     <div className="text-4xl">{outfit.image || "👗"}</div>
@@ -320,7 +320,7 @@ function OutfitForm({
   error?: string
 }) {
   return (
-    <form onSubmit={onSubmit} className="bg-white rounded-xl shadow-card p-5 space-y-4">
+    <form onSubmit={onSubmit} className="bg-white rounded-xl border border-warm-200 shadow-card p-5 space-y-4">
       <h3 className="font-semibold text-warm-700">{editItem ? "编辑装扮" : "添加新装扮"}</h3>
 
       {error && (

@@ -71,7 +71,7 @@ export default function KidsTasksPage() {
 
   return (
     <PageTransition className="p-5 space-y-5 md:p-8">
-      <h1 className="font-kids text-3xl text-candy-purple pt-4">📋 今日任务</h1>
+      <h1 className="font-kids text-2xl text-warm-800 pt-4">📋 今日任务</h1>
 
       <div className="bg-white rounded-card shadow-soft p-4">
         <div className="flex justify-between text-sm mb-2">

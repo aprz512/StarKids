@@ -77,7 +77,7 @@ export default function AdminPointsPage() {
     <div className="space-y-6 max-w-2xl">
       <h1 className="text-2xl font-bold text-warm-800">⭐ 积分规则设置</h1>
 
-      <form onSubmit={handleSave} className="bg-white rounded-xl shadow-card p-6 space-y-6">
+      <form onSubmit={handleSave} className="bg-white rounded-xl border border-warm-200 shadow-card p-6 space-y-6">
         {message && (
           <div className={cn(
             "text-sm rounded-xl p-3",
@@ -162,7 +162,7 @@ export default function AdminPointsPage() {
         </button>
       </form>
 
-      <div className="bg-white rounded-xl shadow-card p-6 space-y-4">
+      <div className="bg-white rounded-xl border border-warm-200 shadow-card p-6 space-y-4">
         <h2 className="font-semibold text-warm-700">📖 积分规则说明</h2>
         <div className="space-y-3 text-sm text-warm-500">
           <p>🌟 <strong>基础积分</strong>：每完成一个任务获得对应的基础积分</p>

@@ -165,7 +165,7 @@ export default function AdminTasksPage() {
             tasks.map((task) => (
               <div
                 key={task.id}
-                className="bg-white rounded-xl shadow-card p-4 flex items-center gap-4"
+                className="bg-white rounded-xl border border-warm-200 shadow-card p-4 flex items-center gap-4"
               >
                 <div className="text-3xl">{task.icon || "📌"}</div>
                 <div className="flex-1 min-w-0">
@@ -215,7 +215,7 @@ export default function AdminTasksPage() {
             pendingCompletions.map((comp) => (
               <div
                 key={comp.id}
-                className="bg-white rounded-xl shadow-card p-4 flex items-center gap-4"
+                className="bg-white rounded-xl border border-warm-200 shadow-card p-4 flex items-center gap-4"
               >
                 <div className="text-3xl">{comp.task.icon || "📌"}</div>
                 <div className="flex-1 min-w-0">
@@ -257,7 +257,7 @@ function TaskForm({
   error?: string
 }) {
   return (
-    <form onSubmit={onSubmit} className="bg-white rounded-xl shadow-card p-5 space-y-4">
+    <form onSubmit={onSubmit} className="bg-white rounded-xl border border-warm-200 shadow-card p-5 space-y-4">
       <h3 className="font-semibold text-warm-700">创建新任务</h3>
 
       {error && (

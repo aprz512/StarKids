@@ -60,17 +60,17 @@ export function AdminSidebar() {
 
       <aside
         className={cn(
-          "fixed top-0 left-0 z-40 w-64 h-screen glass border-r border-warm-200/60 flex flex-col transition-transform duration-300",
+          "fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-warm-200 flex flex-col transition-transform duration-300",
           "md:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="h-16 flex items-center px-6 border-b border-warm-200/60">
-          <Link href="/admin" onClick={close} className="flex items-center gap-2">
-            <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-lg shadow-card">
+        <div className="h-16 flex items-center px-5 border-b border-warm-200">
+          <Link href="/admin" onClick={close} className="flex items-center gap-2.5">
+            <span className="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-base text-white">
               🌟
             </span>
-            <span className="font-kids text-xl gradient-text">StarKids</span>
+            <span className="font-kids text-lg text-warm-800">StarKids</span>
           </Link>
         </div>
 
@@ -89,9 +89,9 @@ export function AdminSidebar() {
                         href={item.href}
                         onClick={close}
                         className={cn(
-                          "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors",
+                          "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                           isActive
-                            ? "bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-card"
+                            ? "bg-brand-50 text-brand-600"
                             : "text-warm-600 hover:bg-warm-100"
                         )}
                       >

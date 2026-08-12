@@ -88,20 +88,20 @@ export default function RegisterAuthPage() {
     <div className="min-h-screen app-bg flex flex-col items-center justify-center p-5">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-3xl shadow-elevated">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-brand-500 flex items-center justify-center text-3xl shadow-card">
             🎈
           </div>
-          <h1 className="font-kids text-4xl gradient-text mb-2">
+          <h1 className="font-kids text-3xl text-warm-900 mb-2">
             创建账号
           </h1>
-          <p className="text-warm-400">
+          <p className="text-warm-500 text-sm">
             输入邮箱、昵称和密码即可注册
           </p>
         </div>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="glass rounded-2xl p-6 space-y-4 shadow-elevated"
+          className="m-card p-6 space-y-4 shadow-card"
         >
           {error && (
             <div className="bg-candy-red/10 text-candy-red text-sm rounded-xl p-3 text-center">
@@ -239,8 +239,8 @@ export default function RegisterAuthPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full h-14 flex items-center justify-center gap-2
-              btn-gradient font-bold text-lg font-kids rounded-btn
+            className="w-full h-12 flex items-center justify-center gap-2
+              btn-gradient font-bold text-base font-kids
               disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (

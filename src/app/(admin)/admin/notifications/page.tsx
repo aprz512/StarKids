@@ -138,7 +138,7 @@ export default function AdminNotificationsPage() {
             <div
               key={n.id}
               className={cn(
-                "bg-white rounded-xl shadow-card p-4 flex items-start gap-4 border-l-4 transition-all cursor-pointer hover:bg-warm-50",
+                "bg-white rounded-xl border border-warm-200 shadow-card p-4 flex items-start gap-4 border-l-4 transition-all cursor-pointer hover:bg-warm-50",
                 PRIORITY_COLORS[n.priority] || "border-l-transparent",
                 !n.isRead && "bg-warm-50/80"
               )}

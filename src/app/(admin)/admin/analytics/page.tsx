@@ -188,7 +188,7 @@ export default function AdminAnalyticsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl shadow-card p-5">
+        <div className="bg-white rounded-xl border border-warm-200 shadow-card p-5">
           <h2 className="font-semibold text-warm-800 mb-4">📅 每日积分趋势（近7天）</h2>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={dailyChartData}>
@@ -204,7 +204,7 @@ export default function AdminAnalyticsPage() {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-white rounded-xl shadow-card p-5">
+        <div className="bg-white rounded-xl border border-warm-200 shadow-card p-5">
           <h2 className="font-semibold text-warm-800 mb-4">📈 30天积分趋势</h2>
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={trendChartData}>
@@ -229,7 +229,7 @@ export default function AdminAnalyticsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl shadow-card p-5">
+        <div className="bg-white rounded-xl border border-warm-200 shadow-card p-5">
           <h2 className="font-semibold text-warm-800 mb-4">🎯 任务分类分布</h2>
           {categoryChartData.length === 0 ? (
             <p className="text-sm text-warm-400 text-center py-8">暂无数据</p>
@@ -258,7 +258,7 @@ export default function AdminAnalyticsPage() {
           )}
         </div>
 
-        <div className="bg-white rounded-xl shadow-card p-5">
+        <div className="bg-white rounded-xl border border-warm-200 shadow-card p-5">
           <h2 className="font-semibold text-warm-800 mb-4">👶 小朋友概览</h2>
           <div className="space-y-3">
             {filteredMembers.map((m) => (

@@ -140,7 +140,7 @@ export default function AdminShopPage() {
       </div>
 
       {showCreateForm && (
-        <form onSubmit={handleCreate} className="bg-white rounded-xl shadow-card p-5 space-y-4">
+        <form onSubmit={handleCreate} className="bg-white rounded-xl border border-warm-200 shadow-card p-5 space-y-4">
           <h3 className="font-semibold text-warm-700">添加新商品</h3>
           {error && <div className="bg-candy-red/10 text-candy-red text-sm rounded-xl p-3">{error}</div>}
 
@@ -198,7 +198,7 @@ export default function AdminShopPage() {
             </div>
           ) : (
             rewards.map((reward) => (
-              <div key={reward.id} className="bg-white rounded-xl shadow-card p-5 space-y-3">
+              <div key={reward.id} className="bg-white rounded-xl border border-warm-200 shadow-card p-5 space-y-3">
                 <div className="flex items-start justify-between">
                   <div>
                     <h3 className="font-semibold text-warm-800">{reward.name}</h3>
@@ -235,7 +235,7 @@ export default function AdminShopPage() {
             </div>
           ) : (
             pendingRedemptions.map((r) => (
-              <div key={r.id} className="bg-white rounded-xl shadow-card p-4 flex items-center gap-4">
+              <div key={r.id} className="bg-white rounded-xl border border-warm-200 shadow-card p-4 flex items-center gap-4">
                 <div className="text-3xl">🎁</div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-warm-800">{r.reward.name}</h3>
