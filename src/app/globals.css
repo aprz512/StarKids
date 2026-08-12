@@ -22,17 +22,17 @@
   --color-candy-red: #F44336;
   --color-candy-yellow: #FFC107;
 
-  /* 中性色: Material 灰阶 */
-  --color-warm-50: #FAFAFA;
-  --color-warm-100: #F5F5F5;
-  --color-warm-200: #EEEEEE;
-  --color-warm-300: #E0E0E0;
-  --color-warm-400: #BDBDBD;
-  --color-warm-500: #9E9E9E;
-  --color-warm-600: #757575;
-  --color-warm-700: #616161;
-  --color-warm-800: #424242;
-  --color-warm-900: #212121;
+  /* 中性色: Nebular 蓝黑文字系 (ngx-admin) */
+  --color-warm-50: #F7F9FC;
+  --color-warm-100: #EDF1F7;
+  --color-warm-200: #E4E9F2;
+  --color-warm-300: #C5CEE0;
+  --color-warm-400: #AEB9CE;
+  --color-warm-500: #8F9BB3;
+  --color-warm-600: #4E5879;
+  --color-warm-700: #333E5C;
+  --color-warm-800: #222B45;
+  --color-warm-900: #1A1B2E;
 
   /* 管理端 */
   --color-admin-primary: #3F51B5;
@@ -59,11 +59,11 @@
 /* Material 卡片: 白底 + 细边框 */
 .m-card {
   background: #FFFFFF;
-  border: 1px solid #E0E0E0;
+  border: 1px solid #E4E9F2;
   border-radius: 8px;
 }
 .m-card:hover {
-  border-color: #BDBDBD;
+  border-color: #C5CEE0;
 }
 
 /* 扁平主按钮 (Material filled button) */
@@ -81,9 +81,9 @@
   background: #303F9F;
 }
 
-/* 页面背景: 纯浅灰 (Material background) */
+/* 页面背景: 浅蓝灰 (Nebular basic-bg-2) */
 .app-bg {
-  background: #FAFAFA;
+  background: #F7F9FC;
 }
 
 /* 渐变文字保留定义但不再使用 (兼容旧代码) */
@@ -92,5 +92,5 @@
 }
 .glass {
   background: #FFFFFF;
-  border: 1px solid #E0E0E0;
+  border: 1px solid #E4E9F2;
 }
