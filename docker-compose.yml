@@ -17,6 +17,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - ./docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh:ro
     networks:
       - starkids-network
 
