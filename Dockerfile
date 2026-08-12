@@ -1,14 +1,16 @@
 FROM node:22-alpine AS base
 
 FROM base AS deps
-RUN apk add --no-cache libc6-compat python3 make g++
+RUN sed -i 's|dl-cdn.alpinelinux.org|mirrors.aliyun.com|g' /etc/apk/repositories && apk add --no-cache libc6-compat python3 make g++
+ENV npm_config_registry=https://registry.npmmirror.com
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
 RUN npm ci --omit=dev
 
 FROM base AS builder
-RUN apk add --no-cache libc6-compat python3 make g++
+RUN sed -i 's|dl-cdn.alpinelinux.org|mirrors.aliyun.com|g' /etc/apk/repositories && apk add --no-cache libc6-compat python3 make g++
+ENV npm_config_registry=https://registry.npmmirror.com
 WORKDIR /app
 
 ARG DATABASE_URL
