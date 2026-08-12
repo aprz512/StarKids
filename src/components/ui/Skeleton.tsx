@@ -1,12 +1,26 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
 type SkeletonProps = {
   className?: string
 }
 
+/**
+ * 骨架屏延迟 200ms 显示:
+ * 数据在 200ms 内到达时不渲染骨架(避免切换页面时闪烁),
+ * 超过 200ms 才显示占位(慢网络下的合理体验)
+ */
 export function Skeleton({ className }: SkeletonProps) {
+  const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    const t = setTimeout(() => setShow(true), 200)
+    return () => clearTimeout(t)
+  }, [])
+
+  if (!show) return null
   return (
     <div className={cn("bg-warm-200 animate-pulse rounded-lg", className)} />
   )
