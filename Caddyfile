@@ -1,0 +1,16 @@
+lyldalek.top {
+	# 主入口: /kidstar/* 剥掉前缀转发给应用
+	handle_path /kidstar/* {
+		reverse_proxy app:3000
+	}
+
+	# 根路径重定向到 /kidstar
+	handle / {
+		redir /kidstar 302
+	}
+
+	# 其余路径(站内导航 / 静态资源 / api/auth)透传
+	handle {
+		reverse_proxy app:3000
+	}
+}
