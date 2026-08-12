@@ -43,43 +43,77 @@
   --font-family-kids: "ZCOOL KuaiLe", "Noto Sans SC", sans-serif;
   --font-family-parent: "Noto Sans SC", sans-serif;
 
-  /* Nebular 小圆角 */
-  --radius-xl: 4px;
-  --radius-2xl: 8px;
-  --radius-3xl: 12px;
-  --radius-card: 4px;
-  --radius-btn: 4px;
+  /* M3 形状 (Material You) */
+  --radius-xl: 8px;
+  --radius-2xl: 12px;
+  --radius-3xl: 16px;
+  --radius-card: 12px;
+  --radius-btn: 999px;
 
-  /* Nebular 卡片阴影 (elevation 2) */
+  /* M3 阴影 (elevation 1-2) */
   --shadow-soft: 0 1px 2px rgba(34, 43, 69, 0.05);
-  --shadow-card: 0 2px 12px rgba(34, 43, 69, 0.08);
-  --shadow-elevated: 0 4px 16px rgba(34, 43, 69, 0.12);
+  --shadow-card: 0 1px 3px rgba(34, 43, 69, 0.1), 0 2px 8px rgba(34, 43, 69, 0.06);
+  --shadow-elevated: 0 4px 8px rgba(34, 43, 69, 0.12), 0 8px 24px rgba(34, 43, 69, 0.08);
   --shadow-glow: 0 0 0 3px rgba(63, 81, 181, 0.12);
+
+  /* M3 动效 (Material motion) */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --dur-1: 200ms;
+  --dur-2: 300ms;
+  --dur-3: 500ms;
+}
+
+/* M3 Outlined Text Field: 全局输入控件 */
+@layer base {
+  input[type="text"], input[type="email"], input[type="password"],
+  input[type="number"], input[type="tel"], input[type="url"], input[type="search"],
+  select, textarea {
+    border-radius: 4px;
+    border: 1px solid #C5CEE0;
+    background: #FFFFFF;
+    transition: border-color var(--dur-1) var(--ease-standard),
+                box-shadow var(--dur-1) var(--ease-standard);
+  }
+  input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: none;
+    border-color: #3F51B5;
+    box-shadow: 0 0 0 1px #3F51B5;
+  }
+  input::placeholder, textarea::placeholder {
+    color: #8F9BB3;
+  }
 }
 
 /* Nebular 卡片: 白底 + 细边框 */
 .m-card {
   background: #FFFFFF;
   border: 1px solid #E4E9F2;
-  border-radius: 4px;
+  border-radius: 12px;
 }
 .m-card:hover {
   border-color: #C5CEE0;
 }
 
-/* 扁平主按钮 (Material filled button) */
+/* M3 Filled Button: 胶囊 + 状态层 + M3 动效 */
 .btn-gradient {
   background: #3F51B5;
   color: #fff;
   font-weight: 600;
-  border-radius: 6px;
-  transition: background 0.15s ease, box-shadow 0.15s ease;
+  border-radius: 999px;
+  transition: background var(--dur-1) var(--ease-standard),
+              box-shadow var(--dur-2) var(--ease-standard),
+              transform var(--dur-1) var(--ease-standard);
 }
 .btn-gradient:hover {
   background: #3949AB;
+  box-shadow: 0 1px 2px rgba(34, 43, 69, 0.12), 0 2px 8px rgba(63, 81, 181, 0.3);
 }
 .btn-gradient:active {
   background: #303F9F;
+  transform: scale(0.98);
+  box-shadow: none;
 }
 
 /* 页面背景: 浅蓝灰 (Nebular basic-bg-2) */

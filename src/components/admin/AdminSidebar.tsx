@@ -89,7 +89,7 @@ export function AdminSidebar() {
                         href={item.href}
                         onClick={close}
                         className={cn(
-                          "flex items-center gap-3 px-3 py-2 rounded text-sm font-medium transition-colors",
+                          "flex items-center gap-3 px-3 py-2 rounded-full text-sm font-medium transition-colors duration-200",
                           isActive
                             ? "bg-brand-500 text-white shadow-card"
                             : "text-warm-300 hover:bg-white/5 hover:text-white"
