@@ -21,12 +21,11 @@ ENV AUTH_SECRET=$AUTH_SECRET
 COPY package.json package-lock.json* ./
 RUN npm ci
 
-COPY prisma ./prisma
+COPY . .
 RUN sed -i 's/provider = "sqlite"/provider = "postgresql"/' prisma/schema.prisma
 COPY docker/prisma.config.ts ./prisma.config.ts
 RUN npx prisma generate
 
-COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_PUBLIC_APP_URL=http://localhost:3000
 RUN npm run build
