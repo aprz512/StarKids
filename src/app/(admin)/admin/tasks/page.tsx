@@ -120,7 +120,7 @@ export default function AdminTasksPage() {
             setShowCreateForm(!showCreateForm)
             setEditId(null)
           }}
-          className="h-10 px-5 bg-admin-primary text-white rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
+          className="h-10 px-5 btn-gradient rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
         >
           + 创建任务
         </button>
@@ -335,7 +335,7 @@ function TaskForm({
       <div className="flex gap-3">
         <button
           type="submit"
-          className="h-10 px-5 bg-admin-primary text-white rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
+          className="h-10 px-5 btn-gradient rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
         >
           创建任务
         </button>
@@ -422,7 +422,7 @@ function AssignDialog({
           ))}
         </div>
         <div className="flex gap-3">
-          <button onClick={handleSave} className="flex-1 h-10 bg-admin-primary text-white rounded-xl text-sm font-semibold">
+          <button onClick={handleSave} className="flex-1 h-10 btn-gradient rounded-xl text-sm font-semibold">
             保存
           </button>
           <button onClick={() => setOpen(false)} className="flex-1 h-10 bg-warm-100 text-warm-600 rounded-xl text-sm">

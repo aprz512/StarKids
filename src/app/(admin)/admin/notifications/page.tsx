@@ -110,7 +110,7 @@ export default function AdminNotificationsPage() {
             className={cn(
               "h-10 px-4 rounded-xl text-sm font-medium transition-colors",
               unreadOnly
-                ? "bg-admin-primary text-white"
+                ? "btn-gradient"
                 : "bg-warm-100 text-warm-600 hover:bg-warm-200"
             )}
           >

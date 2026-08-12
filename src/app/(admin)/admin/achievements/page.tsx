@@ -151,7 +151,7 @@ export default function AdminAchievementsPage() {
             setShowForm(!showForm)
             setEditItem(null)
           }}
-          className="h-10 px-5 bg-admin-primary text-white rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
+          className="h-10 px-5 btn-gradient rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
         >
           + 创建成就
         </button>
@@ -424,7 +424,7 @@ function AchievementForm({
       <div className="flex gap-3">
         <button
           type="submit"
-          className="h-10 px-5 bg-admin-primary text-white rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
+          className="h-10 px-5 btn-gradient rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
         >
           {editItem ? "保存修改" : "创建成就"}
         </button>

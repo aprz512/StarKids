@@ -262,7 +262,7 @@ export default function AdminFamilyPage() {
             "h-10 px-5 rounded-xl text-sm font-semibold transition-all",
             copied
               ? "bg-candy-green text-white"
-              : "bg-admin-primary text-white hover:brightness-110"
+              : "btn-gradient hover:brightness-110"
           )}
         >
           {copied ? "✅ 已复制" : "📋 复制"}

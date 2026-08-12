@@ -156,7 +156,7 @@ export default function AdminPointsPage() {
         <button
           type="submit"
           disabled={saving}
-          className="h-11 px-8 bg-admin-primary text-white rounded-xl text-sm font-semibold hover:brightness-110 transition-all disabled:opacity-50"
+          className="h-11 px-8 btn-gradient rounded-xl text-sm font-semibold hover:brightness-110 transition-all disabled:opacity-50"
         >
           {saving ? "保存中..." : "保存设置"}
         </button>

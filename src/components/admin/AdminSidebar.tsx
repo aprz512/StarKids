@@ -60,15 +60,17 @@ export function AdminSidebar() {
 
       <aside
         className={cn(
-          "fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-warm-200 flex flex-col transition-transform duration-300",
+          "fixed top-0 left-0 z-40 w-64 h-screen glass border-r border-warm-200/60 flex flex-col transition-transform duration-300",
           "md:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="h-16 flex items-center px-6 border-b border-warm-200">
+        <div className="h-16 flex items-center px-6 border-b border-warm-200/60">
           <Link href="/admin" onClick={close} className="flex items-center gap-2">
-            <span className="text-2xl">🌟</span>
-            <span className="font-kids text-xl text-candy-purple">StarKids</span>
+            <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-lg shadow-card">
+              🌟
+            </span>
+            <span className="font-kids text-xl gradient-text">StarKids</span>
           </Link>
         </div>
 
@@ -89,7 +91,7 @@ export function AdminSidebar() {
                         className={cn(
                           "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors",
                           isActive
-                            ? "bg-admin-primary text-white"
+                            ? "bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-card"
                             : "text-warm-600 hover:bg-warm-100"
                         )}
                       >

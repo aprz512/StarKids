@@ -85,7 +85,7 @@ export default function KidsHomePage() {
     return (
       <PageTransition className="p-5 space-y-6 md:p-8">
         <header className="pt-4">
-          <h1 className="font-kids text-3xl text-candy-purple">🌟 小朋友乐园</h1>
+          <h1 className="font-kids text-3xl gradient-text">🌟 小朋友乐园</h1>
         </header>
         <div className="bg-white rounded-card shadow-soft p-8 text-center space-y-4">
           <div className="text-5xl">🔑</div>
@@ -104,7 +104,7 @@ export default function KidsHomePage() {
   return (
     <PageTransition className="p-5 space-y-6 md:p-8">
       <header className="pt-4">
-        <h1 className="font-kids text-3xl text-candy-purple">
+        <h1 className="font-kids text-3xl gradient-text">
           🌟 {greeting}{member?.nickname ? `，${member.nickname}` : ""}！
         </h1>
         <p className="text-warm-400 text-sm mt-1">
@@ -112,10 +112,10 @@ export default function KidsHomePage() {
         </p>
       </header>
 
-      <div className="bg-white rounded-card shadow-soft p-5 space-y-4">
+      <div className="rounded-card p-5 space-y-4 bg-gradient-to-br from-indigo-500 via-violet-500 to-violet-400 shadow-elevated text-white">
         <div className="text-center">
-          <p className="text-warm-400 text-sm">💫 当前积分</p>
-          <p className="font-kids text-5xl text-brand-500">{member?.currentPoints || 0} ⭐</p>
+          <p className="text-indigo-100 text-sm">💫 当前积分</p>
+          <p className="font-kids text-5xl text-white drop-shadow-md">{member?.currentPoints || 0} ⭐</p>
         </div>
 
         <div className="flex gap-3 justify-center">
@@ -126,10 +126,10 @@ export default function KidsHomePage() {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="flex-1 bg-warm-50 rounded-xl p-3 text-center"
+              className="flex-1 bg-white/15 backdrop-blur-sm rounded-xl p-3 text-center"
             >
               <div className="text-2xl">{stat.value}</div>
-              <div className="text-xs text-warm-400 mt-1">
+              <div className="text-xs text-indigo-100 mt-1">
                 {stat.label}
               </div>
             </div>

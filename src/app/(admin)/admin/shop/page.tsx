@@ -113,7 +113,7 @@ export default function AdminShopPage() {
         <h1 className="text-2xl font-bold text-warm-800">🛒 积分商城</h1>
         <button
           onClick={() => setShowCreateForm(!showCreateForm)}
-          className="h-10 px-5 bg-admin-primary text-white rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
+          className="h-10 px-5 btn-gradient rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
         >
           + 添加商品
         </button>
@@ -183,7 +183,7 @@ export default function AdminShopPage() {
           </div>
 
           <div className="flex gap-3">
-            <button type="submit" className="h-10 px-5 bg-admin-primary text-white rounded-xl text-sm font-semibold hover:brightness-110 transition-all">添加商品</button>
+            <button type="submit" className="h-10 px-5 btn-gradient rounded-xl text-sm font-semibold hover:brightness-110 transition-all">添加商品</button>
             <button type="button" onClick={() => setShowCreateForm(false)} className="h-10 px-5 bg-warm-100 text-warm-600 rounded-xl text-sm hover:bg-warm-200 transition-colors">取消</button>
           </div>
         </form>

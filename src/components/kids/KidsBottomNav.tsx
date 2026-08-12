@@ -16,7 +16,7 @@ export function KidsBottomNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-warm-200 safe-area-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 glass border-t border-warm-200/60 safe-area-bottom">
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto md:max-w-3xl">
         {navItems.map((item) => {
           const isActive = pathname === item.href
@@ -27,14 +27,14 @@ export function KidsBottomNav() {
               className={cn(
                 "flex flex-col items-center justify-center gap-0.5 flex-1 h-full transition-colors",
                 isActive
-                  ? "text-candy-blue"
+                  ? "text-brand-500"
                   : "text-warm-400 hover:text-warm-600"
               )}
             >
-              <span className="text-2xl">{item.icon}</span>
+              <span className={cn("text-2xl", isActive && "drop-shadow-[0_2px_6px_rgba(99,102,241,0.4)]")}>{item.icon}</span>
               <span className={cn(
                 "text-xs font-semibold",
-                isActive && "font-kids"
+                isActive && "font-kids gradient-text"
               )}>
                 {item.label}
               </span>

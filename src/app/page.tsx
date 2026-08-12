@@ -21,7 +21,7 @@ export default function HomePage() {
           </Link>
           <Link
             href="/admin"
-            className="inline-flex items-center justify-center h-12 px-6 text-base font-semibold text-admin-primary bg-white border-2 border-admin-primary rounded-xl hover:bg-admin-primary hover:text-white transition-colors"
+            className="inline-flex items-center justify-center h-12 px-6 text-base font-semibold btn-gradient rounded-xl shadow-card"
           >
             👑 我是家长
           </Link>
