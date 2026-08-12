@@ -45,7 +45,7 @@ export function AdminSidebar() {
       <button
         onClick={() => setOpen(true)}
         aria-label="打开菜单"
-        className="fixed top-4 left-4 z-50 md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white shadow-soft border border-warm-200 text-warm-700 hover:bg-warm-50 transition-colors"
+        className="fixed top-4 left-4 z-50 md:hidden w-10 h-10 flex items-center justify-center rounded-lg bg-white shadow-card border border-warm-200 text-warm-700 hover:bg-warm-100 transition-colors"
       >
         <span className="text-lg leading-none">☰</span>
       </button>
@@ -60,27 +60,27 @@ export function AdminSidebar() {
 
       <aside
         className={cn(
-          "fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-warm-200 flex flex-col transition-transform duration-300",
+          "fixed top-0 left-0 z-40 w-64 h-screen bg-nav-bg flex flex-col transition-transform duration-300",
           "md:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="h-16 flex items-center px-5 border-b border-warm-200">
+        <div className="h-16 flex items-center px-5 border-b border-white/10">
           <Link href="/admin" onClick={close} className="flex items-center gap-2.5">
-            <span className="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-base text-white">
+            <span className="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-base">
               🌟
             </span>
-            <span className="font-kids text-lg text-warm-800">StarKids</span>
+            <span className="font-kids text-lg text-white">StarKids</span>
           </Link>
         </div>
 
-        <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-6">
+        <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-5">
           {adminNavItems.map((section) => (
             <div key={section.section}>
-              <h3 className="px-3 mb-2 text-xs font-semibold text-warm-400 uppercase tracking-wider">
+              <h3 className="px-3 mb-1.5 text-[11px] font-semibold text-warm-400 uppercase tracking-wider">
                 {section.section}
               </h3>
-              <ul className="space-y-1">
+              <ul className="space-y-0.5">
                 {section.items.map((item) => {
                   const isActive = pathname === item.href
                   return (
@@ -89,13 +89,13 @@ export function AdminSidebar() {
                         href={item.href}
                         onClick={close}
                         className={cn(
-                          "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                          "flex items-center gap-3 px-3 py-2 rounded text-sm font-medium transition-colors",
                           isActive
-                            ? "bg-brand-50 text-brand-600"
-                            : "text-warm-600 hover:bg-warm-100"
+                            ? "bg-brand-500 text-white shadow-card"
+                            : "text-warm-300 hover:bg-white/5 hover:text-white"
                         )}
                       >
-                        <span className="text-lg">{item.icon}</span>
+                        <span className="text-base opacity-90">{item.icon}</span>
                         <span>{item.label}</span>
                       </Link>
                     </li>
@@ -106,18 +106,18 @@ export function AdminSidebar() {
           ))}
         </nav>
 
-        <div className="border-t border-warm-200 p-4 space-y-2">
+        <div className="border-t border-white/10 p-4 space-y-1">
           <Link
             href="/"
             onClick={close}
-            className="flex items-center gap-2 text-sm text-warm-400 hover:text-warm-600 transition-colors"
+            className="flex items-center gap-2 px-3 py-2 rounded text-sm text-warm-300 hover:bg-white/5 hover:text-white transition-colors"
           >
             <span>←</span>
             <span>返回首页</span>
           </Link>
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}
-            className="flex items-center gap-2 text-sm text-warm-400 hover:text-candy-red transition-colors w-full"
+            className="flex items-center gap-2 px-3 py-2 rounded text-sm text-warm-300 hover:bg-white/5 hover:text-candy-red transition-colors w-full"
           >
             <span>🚪</span>
             <span>退出登录</span>
