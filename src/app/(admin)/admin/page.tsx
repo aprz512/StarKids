@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import { LayoutDashboard, Users, ClipboardList, Hourglass, Sparkles, type LucideIcon } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { CardSkeleton } from "@/components/ui/Skeleton"
+import { CardSkeleton, Skeleton } from "@/components/ui/Skeleton"
 import { SPECIES_EMOJI, STAGE_LABELS } from "@/lib/constants"
 
 type AnalyticsOverview = {
@@ -88,12 +88,7 @@ export default function AdminDashboardPage() {
         <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><LayoutDashboard className="w-6 h-6 text-brand-500" />管理仪表盘</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="bg-admin-card rounded-xl shadow-card p-5">
-              <div className="animate-pulse space-y-3">
-                <div className="h-4 bg-warm-200 rounded w-2/3" />
-                <div className="h-7 bg-warm-200 rounded w-1/2" />
-              </div>
-            </div>
+            <CardSkeleton key={i} />
           ))}
         </div>
         <CardSkeleton />
