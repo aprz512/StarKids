@@ -5,30 +5,35 @@ import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { signOut } from "next-auth/react"
+import {
+  LayoutDashboard, Bell, Users, ClipboardList, Star, ShoppingCart,
+  Trophy, PawPrint, BarChart3, LogOut, ArrowLeft, Menu,
+  type LucideIcon,
+} from "lucide-react"
 
-const adminNavItems = [
+const adminNavItems: { section: string; items: { href: string; label: string; icon: LucideIcon }[] }[] = [
   {
     section: "总览",
     items: [
-      { href: "/admin", label: "管理仪表盘", icon: "📊" },
-      { href: "/admin/notifications", label: "通知消息", icon: "🔔" },
+      { href: "/admin", label: "管理仪表盘", icon: LayoutDashboard },
+      { href: "/admin/notifications", label: "通知消息", icon: Bell },
     ],
   },
   {
     section: "管理",
     items: [
-      { href: "/admin/family", label: "家庭成员", icon: "👨‍👩‍👧‍👦" },
-      { href: "/admin/tasks", label: "任务管理", icon: "📋" },
-      { href: "/admin/points", label: "积分规则", icon: "⭐" },
-      { href: "/admin/shop", label: "积分商城", icon: "🛒" },
+      { href: "/admin/family", label: "家庭成员", icon: Users },
+      { href: "/admin/tasks", label: "任务管理", icon: ClipboardList },
+      { href: "/admin/points", label: "积分规则", icon: Star },
+      { href: "/admin/shop", label: "积分商城", icon: ShoppingCart },
     ],
   },
   {
     section: "数据",
     items: [
-      { href: "/admin/achievements", label: "成就系统", icon: "🏆" },
-      { href: "/admin/pets", label: "宠物管理", icon: "🐱" },
-      { href: "/admin/analytics", label: "统计分析", icon: "📈" },
+      { href: "/admin/achievements", label: "成就系统", icon: Trophy },
+      { href: "/admin/pets", label: "宠物管理", icon: PawPrint },
+      { href: "/admin/analytics", label: "统计分析", icon: BarChart3 },
     ],
   },
 ]
@@ -47,7 +52,7 @@ export function AdminSidebar() {
         aria-label="打开菜单"
         className="fixed top-4 left-4 z-50 md:hidden w-10 h-10 flex items-center justify-center rounded-lg bg-white shadow-card border border-warm-200 text-warm-700 hover:bg-warm-100 transition-colors"
       >
-        <span className="text-lg leading-none">☰</span>
+        <Menu className="w-5 h-5" />
       </button>
 
       {/* 移动端遮罩 */}
@@ -67,8 +72,8 @@ export function AdminSidebar() {
       >
         <div className="h-16 flex items-center px-5 border-b border-white/10">
           <Link href="/admin" onClick={close} className="flex items-center gap-2.5">
-            <span className="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-base">
-              🌟
+            <span className="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white">
+              <Star className="w-4.5 h-4.5" fill="currentColor" />
             </span>
             <span className="font-kids text-lg text-white">StarKids</span>
           </Link>
@@ -83,6 +88,7 @@ export function AdminSidebar() {
               <ul className="space-y-0.5">
                 {section.items.map((item) => {
                   const isActive = pathname === item.href
+                  const Icon = item.icon
                   return (
                     <li key={item.href}>
                       <Link
@@ -95,7 +101,7 @@ export function AdminSidebar() {
                             : "text-warm-300 hover:bg-white/5 hover:text-white"
                         )}
                       >
-                        <span className="text-base opacity-90">{item.icon}</span>
+                        <Icon className="w-4 h-4 opacity-90" />
                         <span>{item.label}</span>
                       </Link>
                     </li>
@@ -110,16 +116,16 @@ export function AdminSidebar() {
           <Link
             href="/"
             onClick={close}
-            className="flex items-center gap-2 px-3 py-2 rounded text-sm text-warm-300 hover:bg-white/5 hover:text-white transition-colors"
+            className="flex items-center gap-3 px-3 py-2 rounded-full text-sm text-warm-300 hover:bg-white/5 hover:text-white transition-colors"
           >
-            <span>←</span>
+            <ArrowLeft className="w-4 h-4" />
             <span>返回首页</span>
           </Link>
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}
-            className="flex items-center gap-2 px-3 py-2 rounded text-sm text-warm-300 hover:bg-white/5 hover:text-candy-red transition-colors w-full"
+            className="flex items-center gap-3 px-3 py-2 rounded-full text-sm text-warm-300 hover:bg-white/5 hover:text-candy-red transition-colors w-full"
           >
-            <span>🚪</span>
+            <LogOut className="w-4 h-4" />
             <span>退出登录</span>
           </button>
         </div>

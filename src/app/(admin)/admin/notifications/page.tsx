@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { Bell } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CardSkeleton } from "@/components/ui/Skeleton"
 import { useToast } from "@/components/ui/ToastProvider"
@@ -88,7 +89,7 @@ export default function AdminNotificationsPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-warm-800">🔔 通知管理</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><Bell className="w-6 h-6 text-brand-500" />通知管理</h1>
         <CardSkeleton />
         <CardSkeleton />
       </div>
@@ -99,7 +100,7 @@ export default function AdminNotificationsPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-warm-800">🔔 通知管理</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><Bell className="w-6 h-6 text-brand-500" />通知管理</h1>
           <p className="text-sm text-warm-400 mt-1">
             {notifications.length} 条通知 · {unreadCount} 条未读
           </p>

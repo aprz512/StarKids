@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { PawPrint } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { feedPet, dressPet, createPet } from "@/lib/actions/pets"
 import { cn } from "@/lib/utils"
@@ -177,7 +178,7 @@ export default function KidsPetPage() {
   if (loading) {
     return (
       <PageTransition className="p-5 space-y-4 md:p-8">
-        <h1 className="font-kids text-2xl text-warm-800 pt-4">🐱 我的宠物</h1>
+        <h1 className="flex items-center gap-2 font-kids text-2xl text-warm-800 pt-4"><PawPrint className="w-6 h-6 text-brand-500" />我的宠物</h1>
         <ProfileSkeleton />
       </PageTransition>
     )
@@ -186,7 +187,7 @@ export default function KidsPetPage() {
   if (!pet) {
     return (
       <PageTransition className="p-5 space-y-5 md:p-8">
-        <h1 className="font-kids text-2xl text-warm-800 pt-4">🐱 我的宠物</h1>
+        <h1 className="flex items-center gap-2 font-kids text-2xl text-warm-800 pt-4"><PawPrint className="w-6 h-6 text-brand-500" />我的宠物</h1>
 
         {showCreateForm ? (
           <CreatePetForm
@@ -217,7 +218,7 @@ export default function KidsPetPage() {
 
   return (
     <PageTransition className="p-5 space-y-5 md:p-8">
-      <h1 className="font-kids text-2xl text-warm-800 pt-4">🐱 我的宠物</h1>
+      <h1 className="flex items-center gap-2 font-kids text-2xl text-warm-800 pt-4"><PawPrint className="w-6 h-6 text-brand-500" />我的宠物</h1>
 
       {evolving && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">

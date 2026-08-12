@@ -3,13 +3,14 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { Home, ClipboardList, ShoppingCart, PawPrint, Trophy, type LucideIcon } from "lucide-react"
 
-const navItems = [
-  { href: "/kids", label: "首页", icon: "🏠" },
-  { href: "/kids/tasks", label: "任务", icon: "📋" },
-  { href: "/kids/shop", label: "商城", icon: "🛒" },
-  { href: "/kids/pet", label: "宠物", icon: "🐱" },
-  { href: "/kids/achievements", label: "成就", icon: "🏆" },
+const navItems: { href: string; label: string; icon: LucideIcon }[] = [
+  { href: "/kids", label: "首页", icon: Home },
+  { href: "/kids/tasks", label: "任务", icon: ClipboardList },
+  { href: "/kids/shop", label: "商城", icon: ShoppingCart },
+  { href: "/kids/pet", label: "宠物", icon: PawPrint },
+  { href: "/kids/achievements", label: "成就", icon: Trophy },
 ]
 
 export function KidsBottomNav() {
@@ -20,6 +21,7 @@ export function KidsBottomNav() {
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto md:max-w-3xl px-2">
         {navItems.map((item) => {
           const isActive = pathname === item.href
+          const Icon = item.icon
           return (
             <Link
               key={item.href}
@@ -31,7 +33,7 @@ export function KidsBottomNav() {
                   : "text-warm-400 hover:text-warm-600 hover:bg-warm-100"
               )}
             >
-              <span className="text-2xl">{item.icon}</span>
+              <Icon className={cn("w-6 h-6", isActive && "text-brand-600")} />
               <span className={cn(
                 "text-xs font-semibold",
                 isActive && "font-kids"

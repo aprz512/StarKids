@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { Bell } from "lucide-react"
 import { markAsRead, markAllAsRead, deleteNotification } from "@/lib/actions/notifications"
 import { cn } from "@/lib/utils"
 
@@ -49,7 +50,7 @@ export function NotificationBell({ href = "/kids/notifications" }: { href?: stri
       onClick={() => router.push(href)}
       className="relative p-2 hover:bg-warm-100 rounded-xl transition-colors"
     >
-      <span className="text-xl">🔔</span>
+      <Bell className="w-5 h-5 text-warm-600" />
       {count > 0 && (
         <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-candy-red text-white text-xs font-bold rounded-full px-1 animate-pulse">
           {count > 99 ? "99+" : count}

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { LayoutDashboard, Users, ClipboardList, Hourglass, Sparkles, type LucideIcon } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { CardSkeleton } from "@/components/ui/Skeleton"
@@ -84,7 +85,7 @@ export default function AdminDashboardPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-warm-800">📊 管理仪表盘</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><LayoutDashboard className="w-6 h-6 text-brand-500" />管理仪表盘</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="bg-admin-card rounded-xl shadow-card p-5">
@@ -103,7 +104,7 @@ export default function AdminDashboardPage() {
   if (!data) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-warm-800">📊 管理仪表盘</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><LayoutDashboard className="w-6 h-6 text-brand-500" />管理仪表盘</h1>
         <div className="bg-admin-card rounded-xl shadow-card p-10 text-center">
           <p className="text-4xl mb-3">😵</p>
           <p className="text-sm text-warm-400">数据加载失败，请刷新重试</p>
@@ -120,7 +121,7 @@ export default function AdminDashboardPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold text-warm-800">📊 管理仪表盘</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><LayoutDashboard className="w-6 h-6 text-brand-500" />管理仪表盘</h1>
         <Link
           href="/admin/analytics"
           className="text-sm text-admin-primary hover:underline"
@@ -131,15 +132,15 @@ export default function AdminDashboardPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "小朋友", value: memberCount, icon: "👨‍👩‍👧‍👦", suffix: "位", color: "bg-blue-50 text-blue-600" },
-          { label: "活跃任务", value: activeTaskCount, icon: "📋", suffix: "个", color: "bg-green-50 text-green-600" },
-          { label: "待审核", value: overview.pendingTasks, icon: "⏳", suffix: "个", color: "bg-orange-50 text-orange-600" },
-          { label: "累计积分", value: overview.totalPointsEarned, icon: "💫", suffix: "⭐", color: "bg-purple-50 text-purple-600" },
+          { label: "小朋友", value: memberCount, icon: Users, suffix: "位", color: "bg-blue-50 text-blue-600" },
+          { label: "活跃任务", value: activeTaskCount, icon: ClipboardList, suffix: "个", color: "bg-green-50 text-green-600" },
+          { label: "待审核", value: overview.pendingTasks, icon: Hourglass, suffix: "个", color: "bg-orange-50 text-orange-600" },
+          { label: "累计积分", value: overview.totalPointsEarned, icon: Sparkles, suffix: "⭐", color: "bg-purple-50 text-purple-600" },
         ].map((stat) => (
           <div key={stat.label} className="bg-admin-card rounded-xl shadow-card p-5">
             <div className="flex items-center gap-3">
-              <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center text-xl", stat.color)}>
-                {stat.icon}
+              <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center", stat.color)}>
+                <stat.icon className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-sm text-warm-400">{stat.label}</p>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { createAchievement, updateAchievement, deleteAchievement, toggleAchievement } from "@/lib/actions/achievements"
 import { cn } from "@/lib/utils"
@@ -133,7 +134,7 @@ export default function AdminAchievementsPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold text-warm-800">🏆 成就管理</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><Trophy className="w-6 h-6 text-brand-500" />成就管理</h1>
         <CardSkeleton />
       </div>
     )
@@ -143,7 +144,7 @@ export default function AdminAchievementsPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-warm-800">🏆 成就管理</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><Trophy className="w-6 h-6 text-brand-500" />成就管理</h1>
           <p className="text-sm text-warm-400 mt-1">管理家庭成就和查看小朋友解锁情况</p>
         </div>
         <button

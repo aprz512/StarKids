@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { Trophy } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { PageTransition } from "@/components/ui/PageTransition"
 import { CardSkeleton } from "@/components/ui/Skeleton"
@@ -65,7 +66,7 @@ export default function KidsAchievementsPage() {
 
   return (
     <PageTransition className="p-5 space-y-5 md:p-8">
-      <h1 className="font-kids text-2xl text-warm-800 pt-4">🏆 我的成就</h1>
+      <h1 className="flex items-center gap-2 font-kids text-2xl text-warm-800 pt-4"><Trophy className="w-6 h-6 text-brand-500" />我的成就</h1>
 
       <div className="bg-white rounded-card shadow-soft p-5">
         <div className="flex items-center gap-4">

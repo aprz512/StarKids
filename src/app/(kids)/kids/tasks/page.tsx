@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { ClipboardList } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { completeTask } from "@/lib/actions/tasks"
 import { cn } from "@/lib/utils"
@@ -71,7 +72,7 @@ export default function KidsTasksPage() {
 
   return (
     <PageTransition className="p-5 space-y-5 md:p-8">
-      <h1 className="font-kids text-2xl text-warm-800 pt-4">📋 今日任务</h1>
+      <h1 className="flex items-center gap-2 font-kids text-2xl text-warm-800 pt-4"><ClipboardList className="w-6 h-6 text-brand-500" />今日任务</h1>
 
       <div className="bg-white rounded-card shadow-soft p-4">
         <div className="flex justify-between text-sm mb-2">

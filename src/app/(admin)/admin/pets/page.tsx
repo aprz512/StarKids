@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { PawPrint } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { createOutfit, updateOutfit, deleteOutfit, unlockOutfit } from "@/lib/actions/outfits"
 import { cn } from "@/lib/utils"
@@ -132,7 +133,7 @@ export default function AdminPetsPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold text-warm-800">🐱 宠物管理</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><PawPrint className="w-6 h-6 text-brand-500" />宠物管理</h1>
         <CardSkeleton />
       </div>
     )
@@ -142,7 +143,7 @@ export default function AdminPetsPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-warm-800">🐱 宠物管理</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><PawPrint className="w-6 h-6 text-brand-500" />宠物管理</h1>
           <p className="text-sm text-warm-400 mt-1">管理宠物装扮和小朋友获取情况</p>
         </div>
         <button

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { ShoppingCart } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { createReward, deleteReward, approveRedemption, rejectRedemption } from "@/lib/actions/shop"
 import { cn } from "@/lib/utils"
@@ -101,7 +102,7 @@ export default function AdminShopPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold text-warm-800">🛒 积分商城</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><ShoppingCart className="w-6 h-6 text-brand-500" />积分商城</h1>
         <CardSkeleton />
       </div>
     )
@@ -110,7 +111,7 @@ export default function AdminShopPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold text-warm-800">🛒 积分商城</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><ShoppingCart className="w-6 h-6 text-brand-500" />积分商城</h1>
         <button
           onClick={() => setShowCreateForm(!showCreateForm)}
           className="h-10 px-5 btn-gradient rounded-xl text-sm font-semibold hover:brightness-110 transition-all"

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { ShoppingCart } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { redeemReward } from "@/lib/actions/shop"
 import { cn } from "@/lib/utils"
@@ -81,7 +82,7 @@ export default function KidsShopPage() {
 
   return (
     <PageTransition className="p-5 space-y-5 md:p-8">
-      <h1 className="font-kids text-2xl text-warm-800 pt-4">🛒 积分商城</h1>
+      <h1 className="flex items-center gap-2 font-kids text-2xl text-warm-800 pt-4"><ShoppingCart className="w-6 h-6 text-brand-500" />积分商城</h1>
 
       <div className="bg-white rounded-card shadow-soft p-5 space-y-4">
         <div className="flex items-center gap-4">

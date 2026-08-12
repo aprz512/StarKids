@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { BarChart3 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SPECIES_EMOJI, STAGE_LABELS } from "@/lib/constants"
 import { CardSkeleton } from "@/components/ui/Skeleton"
@@ -74,7 +75,7 @@ export default function AdminAnalyticsPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold text-warm-800">📈 统计分析</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><BarChart3 className="w-6 h-6 text-brand-500" />统计分析</h1>
         <CardSkeleton />
       </div>
     )
@@ -83,7 +84,7 @@ export default function AdminAnalyticsPage() {
   if (noFamily) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-warm-800">📈 统计分析</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><BarChart3 className="w-6 h-6 text-brand-500" />统计分析</h1>
         <div className="bg-admin-card rounded-xl shadow-card p-10 text-center">
           <p className="text-5xl mb-4">📊</p>
           <h2 className="text-lg font-semibold text-warm-700 mb-2">还没有家庭数据</h2>
@@ -98,7 +99,7 @@ export default function AdminAnalyticsPage() {
   if (!data) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-warm-800">📈 统计分析</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><BarChart3 className="w-6 h-6 text-brand-500" />统计分析</h1>
         <div className="bg-admin-card rounded-xl shadow-card p-10 text-center">
           <p className="text-4xl mb-3">😵</p>
           <p className="text-sm text-warm-400">数据加载失败，请刷新重试</p>
@@ -134,7 +135,7 @@ export default function AdminAnalyticsPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-warm-800">📈 统计分析</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><BarChart3 className="w-6 h-6 text-brand-500" />统计分析</h1>
           <p className="text-sm text-warm-400 mt-1">过去30天的数据总览</p>
         </div>
         <select

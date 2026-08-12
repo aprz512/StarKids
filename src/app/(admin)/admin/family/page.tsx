@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { Users } from "lucide-react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
@@ -123,7 +124,7 @@ export default function AdminFamilyPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-warm-800">👨‍👩‍👧‍👦 家庭成员</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><Users className="w-6 h-6 text-brand-500" />家庭成员</h1>
         <CardSkeleton />
       </div>
     )
@@ -132,7 +133,7 @@ export default function AdminFamilyPage() {
   if (noFamily) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-warm-800">👨‍👩‍👧‍👦 家庭成员</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><Users className="w-6 h-6 text-brand-500" />家庭成员</h1>
         <div className="bg-admin-card rounded-xl shadow-card p-10 text-center">
           <p className="text-5xl mb-4">🏡</p>
           <h2 className="text-lg font-semibold text-warm-700 mb-2">还没有创建家庭</h2>
@@ -153,7 +154,7 @@ export default function AdminFamilyPage() {
   if (!data) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-warm-800">👨‍👩‍👧‍👦 家庭成员</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><Users className="w-6 h-6 text-brand-500" />家庭成员</h1>
         <div className="bg-admin-card rounded-xl shadow-card p-10 text-center">
           <p className="text-4xl mb-3">😵</p>
           <p className="text-sm text-warm-400">加载失败，请刷新重试</p>
@@ -169,7 +170,7 @@ export default function AdminFamilyPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-warm-800">👨‍👩‍👧‍👦 家庭成员</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><Users className="w-6 h-6 text-brand-500" />家庭成员</h1>
           <p className="text-sm text-warm-400 mt-1">
             {data.name} · {data.members.length} 位成员
           </p>

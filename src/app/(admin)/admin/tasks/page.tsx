@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { ClipboardList } from "lucide-react"
 import { createTask, deleteTask, approveTask, rejectTask } from "@/lib/actions/tasks"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -105,7 +106,7 @@ export default function AdminTasksPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold text-warm-800">📋 任务管理</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><ClipboardList className="w-6 h-6 text-brand-500" />任务管理</h1>
         <CardSkeleton />
       </div>
     )
@@ -114,7 +115,7 @@ export default function AdminTasksPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold text-warm-800">📋 任务管理</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><ClipboardList className="w-6 h-6 text-brand-500" />任务管理</h1>
         <button
           onClick={() => {
             setShowCreateForm(!showCreateForm)

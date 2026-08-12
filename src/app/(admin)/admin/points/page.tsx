@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { Star } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { CardSkeleton } from "@/components/ui/Skeleton"
@@ -67,7 +68,7 @@ export default function AdminPointsPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold text-warm-800">⭐ 积分规则</h1>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-warm-800"><Star className="w-6 h-6 text-brand-500" />积分规则</h1>
         <CardSkeleton />
       </div>
     )
