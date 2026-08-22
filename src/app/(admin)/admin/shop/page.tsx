@@ -68,11 +68,12 @@ export default function AdminShopPage() {
   async function handleCreate(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setError("")
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     try {
       await createReward(formData)
       setShowCreateForm(false)
-      e.currentTarget.reset()
+      form.reset()
       fetchData()
       router.refresh()
     } catch (err: any) {
