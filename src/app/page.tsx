@@ -1,6 +1,15 @@
 import Link from "next/link"
+import { auth } from "@/auth"
+import { redirect } from "next/navigation"
 
-export default function HomePage() {
+// 已登录用户访问首页时按角色分流 (登录成功但客户端跳转失败时的兜底入口)
+export default async function HomePage() {
+  const session = await auth()
+
+  if (session?.user?.id) {
+    redirect(session.user.role === "PARENT" ? "/admin" : "/kids")
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center">
       <div className="max-w-md space-y-8">

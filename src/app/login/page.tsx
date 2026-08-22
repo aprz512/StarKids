@@ -45,14 +45,28 @@ export default function LoginPage() {
         return
       }
 
-      const session = await getSession()
-      const role = session?.user?.role
+      // signIn 成功 = 会话 cookie 已设置。getSession 仅用于决定跳转方向,
+      // 加超时兜底: 即使会话查询失败/挂起, 也绝不卡在 loading——
+      // 整页跳转到首页, 由服务端按角色分流 (见 src/app/page.tsx)。
+      let role: string | null = null
+      try {
+        const session = await Promise.race([
+          getSession(),
+          new Promise<null>((resolve) => setTimeout(() => resolve(null), 4000)),
+        ])
+        role = session?.user?.role ?? null
+      } catch {
+        role = null
+      }
+
       if (role === "PARENT") {
         router.push("/admin")
-      } else {
+      } else if (role === "KID") {
         router.push("/kids")
+      } else {
+        // 会话读取失败但登录实际已成功: 硬导航走服务端分流
+        window.location.href = "/"
       }
-      router.refresh()
     } catch {
       setError("网络错误，请稍后再试")
       setIsLoading(false)
