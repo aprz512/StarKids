@@ -79,13 +79,13 @@ enum TaskCategory {
 
 // ── 奖励 (商城道具) 分类 ──
 enum RewardCategory {
-  MONEY                // 零花钱
   TOY                  // 玩具
-  BOOK                 // 绘本/书籍
-  ENTERTAINMENT        // 娱乐时间
+  SNACK                // 零食
   PRIVILEGE            // 特权
   EXPERIENCE           // 体验
-  CUSTOM               // 自定义
+  MONEY                // 零花钱
+  DIGITAL              // 数字内容
+  OTHER                // 其他
 }
 
 // ── 奖励状态 ──
