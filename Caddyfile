@@ -18,3 +18,10 @@ lyldalek.top {
 	# 根路径直接进入应用 (无子路径)
 	reverse_proxy app:3000
 }
+
+# 备案拦截临时绕行端口 (阿里云只拦 80/443; 备案接入完成后可移除)
+# 服务器访问 Let's Encrypt 超时, 8443 直接复用已有证书 (不走 ACME)
+lyldalek.top:8443 {
+	tls /data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/lyldalek.top/lyldalek.top.crt /data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/lyldalek.top/lyldalek.top.key
+	reverse_proxy app:3000
+}
