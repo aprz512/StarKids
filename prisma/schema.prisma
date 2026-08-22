@@ -74,6 +74,7 @@ enum TaskCategory {
   EXERCISE             // 运动
   HABIT                // 生活习惯
   SOCIAL               // 社交礼仪
+  CREATIVE             // 创意
   OTHER                // 其他
 }
 

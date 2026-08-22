@@ -8,10 +8,28 @@
  */
 
 import { PrismaClient } from '@prisma/client'
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
 
-const adapter = new PrismaBetterSqlite3({ url: "file:./dev.db" })
-const prisma = new PrismaClient({ adapter })
+// 按 DATABASE_URL 选择驱动适配器 (与 src/lib/db.ts 一致):
+// - postgres:// 前缀 → @prisma/adapter-pg (生产)
+// - 其他 (含空值) → @prisma/adapter-better-sqlite3 (本地 dev.db)
+// 否则生产容器里 seed 会因 sqlite adapter 不兼容 postgres provider 而失败。
+function createPrismaClient() {
+  const url = process.env.DATABASE_URL || ''
+
+  if (url.startsWith('postgresql://') || url.startsWith('postgres://')) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { PrismaPg } = require('@prisma/adapter-pg')
+    const adapter = new PrismaPg({ connectionString: url })
+    return new PrismaClient({ adapter })
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { PrismaBetterSqlite3 } = require('@prisma/adapter-better-sqlite3')
+  const adapter = new PrismaBetterSqlite3({ url: url || 'file:./dev.db' })
+  return new PrismaClient({ adapter })
+}
+
+const prisma = createPrismaClient()
 
 async function main() {
   console.log('🌱 开始播种 StarKids 种子数据...')
