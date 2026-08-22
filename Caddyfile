@@ -1,13 +1,20 @@
-lyldalek.top {
-	# 根路径与无斜杠的 /kidstar 都重定向到 /kidstar/
-	redir / /kidstar/ 308
-	redir /kidstar /kidstar/ 308
+{
+	# 禁用自动 http->https 重定向 (微信校验文件需要在 80 端口直接返回内容)
+	# 证书自动签发/续期不受影响
+	auto_https disable_redirects
+}
 
-	# 主入口: /kidstar/* 剥掉前缀转发给应用
-	handle_path /kidstar/* {
-		reverse_proxy app:3000
+http://lyldalek.top {
+	# route 保持书写顺序: 校验文件必须先于 redir 匹配 (Caddy 默认排序会把 redir 排到 handle 前面)
+	route {
+		handle /281efb83f68f730d38e8d6787172a026.txt {
+			respond "5d73d898e3d816e9d6c008b38782f5082560493a"
+		}
+		redir * https://lyldalek.top{uri} 308
 	}
+}
 
-	# 其余路径(站内导航 / 静态资源 / api/auth)透传
+lyldalek.top {
+	# 根路径直接进入应用 (无子路径)
 	reverse_proxy app:3000
 }

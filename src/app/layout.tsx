@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { ZCOOL_KuaiLe, Noto_Sans_SC } from "next/font/google"
 import "./globals.css"
 import { ToastProvider } from "@/components/ui/ToastProvider"
+import { SiteFooter } from "@/components/SiteFooter"
 
 const zcoolKuaiLe = ZCOOL_KuaiLe({
   weight: "400",
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body className="font-parent text-warm-700 bg-warm-50 antialiased">
         <ToastProvider>
           {children}
+          <SiteFooter />
         </ToastProvider>
       </body>
     </html>
