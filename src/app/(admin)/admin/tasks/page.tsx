@@ -50,8 +50,25 @@ export default function AdminTasksPage() {
   const [activeTab, setActiveTab] = useState<"tasks" | "review">("tasks")
   const [showCreateForm, setShowCreateForm] = useState(false)
   const [editId, setEditId] = useState<string | null>(null)
+  const [kids, setKids] = useState<{ id: string; nickname: string }[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
+
+  const fetchKids = useCallback(async () => {
+    try {
+      const res = await fetch("/api/family/members")
+      if (res.ok) {
+        const data = await res.json()
+        setKids((data.members || []).filter((m: any) => m.role === "KID"))
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchKids()
+  }, [fetchKids])
 
   const fetchData = useCallback(async () => {
     try {
@@ -172,6 +189,7 @@ export default function AdminTasksPage() {
         <TaskForm
           key={editId ?? "new"}
           initial={editId ? tasks.find((t) => t.id === editId) ?? null : null}
+          kids={kids}
           onSubmit={editId ? handleUpdate : handleCreate}
           onCancel={() => {
             setShowCreateForm(false)
@@ -198,6 +216,9 @@ export default function AdminTasksPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <h3 className="font-semibold text-warm-800">{task.name}</h3>
+                    {task.type === "DAILY" && (
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-brand-100 text-brand-500">每日</span>
+                    )}
                     <span className="text-xs px-2 py-0.5 rounded-full bg-warm-100 text-warm-500">
                       {CATEGORIES.find((c) => c.value === task.category)?.label}
                     </span>
@@ -285,16 +306,19 @@ export default function AdminTasksPage() {
 
 function TaskForm({
   initial,
+  kids,
   onSubmit,
   onCancel,
   error,
 }: {
   initial?: TaskData | null
+  kids: { id: string; nickname: string }[]
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
   onCancel: () => void
   error?: string
 }) {
   const isEdit = !!initial
+  const isDaily = initial ? initial.type === "DAILY" : true
   return (
     <form onSubmit={onSubmit} className="bg-white rounded-xl border border-warm-200 shadow-card p-5 space-y-4">
       <h3 className="font-semibold text-warm-700">{isEdit ? "编辑任务" : "创建新任务"}</h3>
@@ -334,14 +358,6 @@ function TaskForm({
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-warm-600 mb-1">类型</label>
-          <select name="type" defaultValue={initial?.type ?? "DAILY"} className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none">
-            <option value="DAILY">日常任务</option>
-            <option value="CHALLENGE">挑战任务</option>
-            <option value="ONETIME">一次性任务</option>
-          </select>
-        </div>
-        <div>
           <label className="block text-sm font-medium text-warm-600 mb-1">积分</label>
           <input
             name="points"
@@ -368,6 +384,35 @@ function TaskForm({
             className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none"
           />
         </div>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <input type="checkbox" name="isDaily" value="true" id="isDaily" defaultChecked={isDaily} className="rounded" />
+        <label htmlFor="isDaily" className="text-sm text-warm-600">
+          每日任务 (每天自动出现在小朋友的今日任务里)
+        </label>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-warm-600 mb-1">发布给 (可多选)</label>
+        {kids.length === 0 ? (
+          <p className="text-xs text-warm-400">还没有小朋友，先在"家庭成员"里添加</p>
+        ) : (
+          <div className="flex flex-wrap gap-3">
+            {kids.map((k) => (
+              <label key={k.id} className="flex items-center gap-2 text-sm text-warm-700">
+                <input
+                  type="checkbox"
+                  name="assigneeIds"
+                  value={k.id}
+                  defaultChecked={isEdit ? !!initial.assignees.some((a) => a.id === k.id) : true}
+                  className="rounded"
+                />
+                {k.nickname}
+              </label>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="flex items-center gap-2">

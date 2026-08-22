@@ -23,11 +23,19 @@ export async function createTask(formData: FormData) {
 
   const name = formData.get("name") as string
   const points = parseInt(formData.get("points") as string) || 5
+  const isDaily = formData.get("isDaily") === "true"
 
   const kids = await prisma.familyMember.findMany({
     where: { familyId: member.familyId, role: "KID" },
     select: { id: true },
   })
+
+  // 发布对象: 表单多选 assigneeIds; 未传则默认全部孩子 (兼容旧调用)
+  const assigneeIds = formData.getAll("assigneeIds").map(String)
+  const selected =
+    assigneeIds.length > 0
+      ? assigneeIds.filter((id) => kids.some((k) => k.id === id))
+      : kids.map((k) => k.id)
 
   await prisma.task.create({
     data: {
@@ -37,8 +45,8 @@ export async function createTask(formData: FormData) {
       description: (formData.get("description") as string) || null,
       icon: (formData.get("icon") as string) || "📌",
       category: (formData.get("category") as TaskCategory) || "OTHER",
-      type: (formData.get("type") as TaskType) || "DAILY",
-      frequency: (formData.get("frequency") as TaskFrequency) || "DAILY",
+      type: isDaily ? "DAILY" : "ONETIME",
+      frequency: isDaily ? "DAILY" : "MANUAL",
       difficulty: (formData.get("difficulty") as TaskDifficulty) || "EASY",
       points,
       autoApprove: formData.get("autoApprove") === "true",
@@ -50,7 +58,7 @@ export async function createTask(formData: FormData) {
           .filter((n) => !isNaN(n)) || [1, 2, 3, 4, 5, 6, 0]
       ),
       assignees: {
-        connect: kids.map((kid) => ({ id: kid.id })),
+        connect: selected.map((id) => ({ id })),
       },
     },
   })
@@ -71,6 +79,10 @@ export async function updateTask(formData: FormData) {
   if (!existing) throw new Error("任务不存在")
 
   const name = formData.get("name") as string
+  const isDaily = formData.get("isDaily") === "true"
+
+  // 编辑表单总是携带 isDaily; 发布对象用 set 整体替换 (空数组 = 取消全部发布)
+  const assigneeIds = formData.getAll("assigneeIds").map(String)
 
   await prisma.task.update({
     where: { id },
@@ -79,9 +91,9 @@ export async function updateTask(formData: FormData) {
       description: (formData.get("description") as string) || null,
       icon: (formData.get("icon") as string) || existing.icon,
       category: (formData.get("category") as TaskCategory) || existing.category,
-      type: (formData.get("type") as TaskType) || existing.type,
+      type: isDaily ? "DAILY" : "ONETIME",
+      frequency: isDaily ? "DAILY" : "MANUAL",
       difficulty: (formData.get("difficulty") as TaskDifficulty) || existing.difficulty,
-      frequency: (formData.get("frequency") as TaskFrequency) || existing.frequency,
       points: parseInt(formData.get("points") as string) || existing.points,
       autoApprove: formData.has("autoApprove")
         ? formData.get("autoApprove") === "true"
@@ -91,6 +103,9 @@ export async function updateTask(formData: FormData) {
       weekDays: formData.get("weekDays")
         ? JSON.stringify((formData.get("weekDays") as string).split(",").map(Number).filter((n) => !isNaN(n)))
         : existing.weekDays,
+      assignees: {
+        set: assigneeIds.map((id) => ({ id })),
+      },
     },
   })
 
@@ -339,6 +354,16 @@ export async function getMemberTasks(memberId: string) {
     where: {
       status: "ACTIVE",
       assignees: { some: { id: memberId } },
+      // 每日任务每天出现; 一次性任务完成过 (非拒绝) 后不再显示
+      OR: [
+        { type: { not: "ONETIME" } },
+        {
+          type: "ONETIME",
+          completions: {
+            none: { memberId, status: { not: "REJECTED" } },
+          },
+        },
+      ],
     },
     include: {
       completions: {

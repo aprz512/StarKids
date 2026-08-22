@@ -19,6 +19,16 @@ export async function GET() {
       familyId: member.familyId,
       status: "ACTIVE",
       assignees: { some: { id: member.id } },
+      // 每日任务每天出现; 一次性任务完成过 (非拒绝) 后不再显示
+      OR: [
+        { type: { not: "ONETIME" } },
+        {
+          type: "ONETIME",
+          completions: {
+            none: { memberId: member.id, status: { not: "REJECTED" } },
+          },
+        },
+      ],
     },
     include: {
       completions: {
