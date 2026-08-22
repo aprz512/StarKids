@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { ClipboardList } from "lucide-react"
-import { createTask, deleteTask, approveTask, rejectTask } from "@/lib/actions/tasks"
+import { createTask, updateTask, deleteTask, approveTask, rejectTask } from "@/lib/actions/tasks"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { CardSkeleton } from "@/components/ui/Skeleton"
@@ -26,9 +26,12 @@ type TaskData = {
   icon: string | null
   category: string
   type: string
+  difficulty: string
   points: number
   autoApprove: boolean
   status: string
+  maxDaily: number
+  weekDays: string
   assignees: { id: string; nickname: string }[]
   completions: { member: { nickname: string }; status: string }[]
 }
@@ -77,6 +80,23 @@ export default function AdminTasksPage() {
     try {
       await createTask(formData)
       setShowCreateForm(false)
+      form.reset()
+      fetchData()
+      router.refresh()
+    } catch (err: any) {
+      setError(err.message)
+    }
+  }
+
+  async function handleUpdate(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setError("")
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    try {
+      await updateTask(formData)
+      setShowCreateForm(false)
+      setEditId(null)
       form.reset()
       fetchData()
       router.refresh()
@@ -150,8 +170,13 @@ export default function AdminTasksPage() {
 
       {showCreateForm && (
         <TaskForm
-          onSubmit={handleCreate}
-          onCancel={() => setShowCreateForm(false)}
+          key={editId ?? "new"}
+          initial={editId ? tasks.find((t) => t.id === editId) ?? null : null}
+          onSubmit={editId ? handleUpdate : handleCreate}
+          onCancel={() => {
+            setShowCreateForm(false)
+            setEditId(null)
+          }}
           error={error}
         />
       )}
@@ -186,6 +211,15 @@ export default function AdminTasksPage() {
                   </div>
                 </div>
                 <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      setEditId(task.id)
+                      setShowCreateForm(true)
+                    }}
+                    className="h-8 px-3 border border-warm-200 rounded-lg text-xs text-warm-500 hover:border-admin-primary hover:text-admin-primary transition-colors"
+                  >
+                    编辑
+                  </button>
                   <AssignDialog
                     taskId={task.id}
                     onAssign={() => {
@@ -250,21 +284,26 @@ export default function AdminTasksPage() {
 }
 
 function TaskForm({
+  initial,
   onSubmit,
   onCancel,
   error,
 }: {
+  initial?: TaskData | null
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
   onCancel: () => void
   error?: string
 }) {
+  const isEdit = !!initial
   return (
     <form onSubmit={onSubmit} className="bg-white rounded-xl border border-warm-200 shadow-card p-5 space-y-4">
-      <h3 className="font-semibold text-warm-700">创建新任务</h3>
+      <h3 className="font-semibold text-warm-700">{isEdit ? "编辑任务" : "创建新任务"}</h3>
 
       {error && (
         <div className="bg-candy-red/10 text-candy-red text-sm rounded-xl p-3">{error}</div>
       )}
+
+      {isEdit && <input type="hidden" name="id" value={initial.id} />}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
@@ -272,13 +311,14 @@ function TaskForm({
           <input
             name="name"
             required
+            defaultValue={initial?.name}
             placeholder="如：刷牙"
             className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none"
           />
         </div>
         <div>
           <label className="block text-sm font-medium text-warm-600 mb-1">图标</label>
-          <select name="icon" className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none">
+          <select name="icon" defaultValue={initial?.icon ?? ""} className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none">
             <option value="">选择图标</option>
             {EMOJI_PRESETS.map((emoji) => (
               <option key={emoji} value={emoji}>{emoji}</option>
@@ -287,7 +327,7 @@ function TaskForm({
         </div>
         <div>
           <label className="block text-sm font-medium text-warm-600 mb-1">分类</label>
-          <select name="category" className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none">
+          <select name="category" defaultValue={initial?.category ?? "HABIT"} className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none">
             {CATEGORIES.map((c) => (
               <option key={c.value} value={c.value}>{c.label}</option>
             ))}
@@ -295,7 +335,7 @@ function TaskForm({
         </div>
         <div>
           <label className="block text-sm font-medium text-warm-600 mb-1">类型</label>
-          <select name="type" className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none">
+          <select name="type" defaultValue={initial?.type ?? "DAILY"} className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none">
             <option value="DAILY">日常任务</option>
             <option value="CHALLENGE">挑战任务</option>
             <option value="ONETIME">一次性任务</option>
@@ -306,14 +346,14 @@ function TaskForm({
           <input
             name="points"
             type="number"
-            defaultValue={5}
+            defaultValue={initial?.points ?? 5}
             min={1}
             className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none"
           />
         </div>
         <div>
           <label className="block text-sm font-medium text-warm-600 mb-1">难度</label>
-          <select name="difficulty" className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none">
+          <select name="difficulty" defaultValue={initial?.difficulty ?? "EASY"} className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none">
             <option value="EASY">简单</option>
             <option value="MEDIUM">中等</option>
             <option value="HARD">困难</option>
@@ -323,6 +363,7 @@ function TaskForm({
           <label className="block text-sm font-medium text-warm-600 mb-1">描述 (给小朋友看)</label>
           <input
             name="description"
+            defaultValue={initial?.description ?? ""}
             placeholder="如：把牙齿刷得白白的，笑起来更自信！"
             className="w-full h-10 px-3 rounded-lg border border-warm-200 text-warm-700 text-sm focus:border-admin-primary focus:outline-none"
           />
@@ -330,7 +371,7 @@ function TaskForm({
       </div>
 
       <div className="flex items-center gap-2">
-        <input type="checkbox" name="autoApprove" value="true" id="autoApprove" className="rounded" />
+        <input type="checkbox" name="autoApprove" value="true" id="autoApprove" defaultChecked={initial?.autoApprove ?? false} className="rounded" />
         <label htmlFor="autoApprove" className="text-sm text-warm-600">自动通过 (不需要家长审核)</label>
       </div>
 
@@ -339,7 +380,7 @@ function TaskForm({
           type="submit"
           className="h-10 px-5 btn-gradient rounded-xl text-sm font-semibold hover:brightness-110 transition-all"
         >
-          创建任务
+          {isEdit ? "保存修改" : "创建任务"}
         </button>
         <button
           type="button"

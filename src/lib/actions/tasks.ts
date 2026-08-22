@@ -82,7 +82,7 @@ export async function updateTask(formData: FormData) {
       type: (formData.get("type") as TaskType) || existing.type,
       difficulty: (formData.get("difficulty") as TaskDifficulty) || existing.difficulty,
       frequency: (formData.get("frequency") as TaskFrequency) || existing.frequency,
-      points: parseInt(formData.get("points") as string) ?? existing.points,
+      points: parseInt(formData.get("points") as string) || existing.points,
       autoApprove: formData.has("autoApprove")
         ? formData.get("autoApprove") === "true"
         : existing.autoApprove,

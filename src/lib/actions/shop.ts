@@ -40,21 +40,36 @@ export async function updateReward(formData: FormData) {
   if (!session?.user?.id) throw new Error("请先登录")
 
   const id = formData.get("id") as string
+  if (!id) throw new Error("商品ID不能为空")
+
+  const existing = await prisma.reward.findUnique({ where: { id } })
+  if (!existing) throw new Error("商品不存在")
 
   await prisma.reward.update({
     where: { id },
     data: {
-      name: (formData.get("name") as string)?.trim(),
+      name: (formData.get("name") as string)?.trim() || existing.name,
       description: (formData.get("description") as string) || null,
-      category: (formData.get("category") as RewardCategory) || undefined,
-      image: formData.get("image") as string || undefined,
-      points: parseInt(formData.get("points") as string) || undefined,
-      status: (formData.get("status") as RewardStatus) || undefined,
-      isFeatured: formData.has("isFeatured") ? formData.get("isFeatured") === "true" : undefined,
-    }
+      category: (formData.get("category") as RewardCategory) || existing.category,
+      image: (formData.get("image") as string) || existing.image,
+      points: parseInt(formData.get("points") as string) || existing.points,
+      stock: parseInt(formData.get("stock") as string) || existing.stock,
+      maxPerPerson: parseInt(formData.get("maxPerPerson") as string) || existing.maxPerPerson,
+      cooldownDays: parseInt(formData.get("cooldownDays") as string) || existing.cooldownDays,
+      tags: formData.get("tags")
+        ? JSON.stringify(
+            (formData.get("tags") as string).split(",").map((t) => t.trim()).filter(Boolean)
+          )
+        : existing.tags,
+      status: (formData.get("status") as RewardStatus) || existing.status,
+      isFeatured: formData.has("isFeatured")
+        ? formData.get("isFeatured") === "true"
+        : existing.isFeatured,
+    },
   })
 
   revalidatePath("/admin/shop")
+  revalidatePath("/kids/shop")
 }
 
 export async function deleteReward(id: string) {
